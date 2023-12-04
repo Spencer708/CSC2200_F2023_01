@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How Promises Work</title>
+    <link rel="stylesheet" href="css/promiseMain.css" />
+    <script>
+        function doPromise(){
+            let num = parseInt(document.getElementById("myNumber").value);
+            // let num = document.getElementById("myNumber").valueAsNumber;
+            let p = new Promise((resolve, reject) => {
+                num += 2;
+                if(num == 4){
+                    resolve({
+                        message: "Good",
+                        value: num
+                    });
+                } else {
+                    reject("Fail");
+                }
+            }).then((theObj) => {
+                let res = `FL1: message: ${theObj.value}`;
+                document.getElementById("results").innerHTML = res;
+            }).catch((theObj) => {
+                let res = `FL2: reject message: ${theObj} num: ${num}`;
+                document.getElementById("results").innerHTML = res;
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="mainContainer">
+        <header>
+            This is Header
+        </header>
+        <div id="mainLeft">
+            Left
+        </div>
+        <div id="mainRight">
+            Number: <input type="text" id="myNumber">
+            <button type="button" onClick="doPromise()">Start</button>
+            <div id="results">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
